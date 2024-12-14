@@ -1,0 +1,12 @@
+specVersion: "v1beta"
+serviceId: "apphosting-onboard-2"
+location: "us-central1"
+schema:
+  source: "./schema"
+  datasource:
+    postgresql:
+      database: "postgres"
+      cloudSql:
+        instanceId: "fdc-sql"
+      # schemaValidation: "COMPATIBLE"
+connectorDirs: ["./connector"]

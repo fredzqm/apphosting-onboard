@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 
 import "./globals.css";
 import { Header } from "./components";
+import { AuthContext, AuthProvider } from "./lib/firebase";
+import { useContext } from "react";
 
 export const metadata: Metadata = {
   title: "Next.js on Firebase App Hosting",
@@ -23,7 +25,9 @@ export default function RootLayout({
       <body>
         <div className="dots" />
         <Header />
-        {children}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
         <div className="bottom-gradient" />
       </body>
     </html>

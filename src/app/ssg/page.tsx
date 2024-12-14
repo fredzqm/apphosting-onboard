@@ -1,11 +1,19 @@
+import { UserComponent } from "../components/User";
 import { getDateString, getRandomUUID } from "../utils";
+import { cookies } from 'next/headers';
 
 export default function Page() {
+  const cookieStore = cookies(); 
+  const allCookies = cookieStore.getAll();
+  console.log('Cookies:', allCookies); 
   return (
     <main className="content">
       <h1 className="heading">SSG</h1>
 
       <section className="data-container">
+        <article className="card">
+          <UserComponent />
+        </article>
         <article className="card">
           <p>Generated</p>
           <h2>{getDateString()}</h2>
