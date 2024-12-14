@@ -2,7 +2,6 @@ import { Suspense, use } from "react";
 
 import { Loading } from "../../components/Loading";
 import { Timeout } from "../../components/Timeout";
-import { DummyComponent } from "../../components/DummyComponent";
 import { getDateString, getRandomUUID } from "../../utils";
 
 export const dynamic = "force-dynamic";
@@ -17,7 +16,7 @@ export default async function Page() {
   return (
     <main className="content">
       <Suspense fallback={<Loading />}>
-        <DummyComponent data={dummyData}></DummyComponent>
+        {/* <DummyComponent data={dummyData}></DummyComponent> */}
       </Suspense>
       <header>
         <h1 className="heading">A server generated page!</h1>
