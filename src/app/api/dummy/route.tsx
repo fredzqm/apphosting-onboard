@@ -1,8 +1,8 @@
 import { type NextRequest } from 'next/server'
+import { ExecuteQuery } from '../dataconnect_proxy';
 
 export async function GET(req: NextRequest) {
-  // await new Promise(resolve => setTimeout(resolve, 5000));
-  return Response.json({"dummy": "data", "ok": "sure"})
+  return ExecuteQuery("ListMovies");
 }
 
 export async function POST(request: NextRequest) {

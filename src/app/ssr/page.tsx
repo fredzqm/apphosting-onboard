@@ -1,8 +1,42 @@
 import { getDateString, getRandomUUID } from "../utils";
+import { headers, cookies } from 'next/headers';
+import * as admin from 'firebase-admin';
 
 export const dynamic = "force-dynamic";
 
-export default function Page() {
+export default async function Page() {
+  const headersList = await headers()
+  headersList.forEach((k, v) => {
+      console.log(`${k}: ${v}`);
+  })
+
+  const cookieStore = cookies(); 
+  const allCookies = cookieStore.getAll();
+  console.log('Cookies:', allCookies); 
+  const idToken = cookieStore.get("X-Firebase-Auth-Token")?.value;
+  console.log('idToken', idToken);
+
+  const resp = await fetch("http://localhost:3000/api/dummy");
+  const bd = await resp.json();
+  console.log(JSON.stringify(bd));
+
+  // if (!admin.apps.length) {
+  //   admin.initializeApp({
+  //     credential: admin.credential.applicationDefault(),
+  //     projectId: 'fredzqm-staging',
+  //     // ... other configuration options, if needed
+  //   });
+  // }
+
+  // Verify the ID token while checking if the token is revoked by passing checkRevoked
+  // to true.
+  // const decodedToken = await admin.auth().verifyIdToken(idToken!, true);
+  // // Generate a session cookie
+  // const cookie = await admin.auth().createSessionCookie(decodedToken.uid, {
+  //   expiresIn: 60 * 60 * 24 * 5 * 1000, // 5 days (adjust as needed)
+  // });
+  // cookieStore.set("Server-set-auth-token", cookie);
+
   return (
     <main className="content">
       <h1 className="heading">A server generated page!</h1>
