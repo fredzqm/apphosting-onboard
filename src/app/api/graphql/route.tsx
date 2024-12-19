@@ -43,12 +43,20 @@ var users: { [key: string]: User } = {
 // The root provides a resolver function for each API endpoint
 const resolvers = {
   Query: {
-    user: ({ id }: { id: string }): User => {
+    user: (
+      parent: any,
+      { id }: { id: string },
+      contextValue: any,
+      info: any
+    ) => {
       return users[id];
     },
   },
   Mutation: {
-    createUser: ({ name, email }: { name: string; email: string }): User => {
+    createUser: (
+      parent: any,
+      { name, email }: { name: string; email: string }
+    ) => {
       const id = Math.random().toString(36).substring(2, 15);
       const newUser = { id, name, email };
       users[id] = newUser;
