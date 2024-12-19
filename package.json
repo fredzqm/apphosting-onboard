@@ -9,10 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/server": "^4.11.2",
+    "@as-integrations/next": "^3.2.0",
     "@firebasegen/default-connector": "file:dataconnect-generated/js/default-connector",
+    "apollo-server-micro": "^3.13.0",
     "cookies-next": "4.3.0",
     "firebase": "^11.1.0",
     "firebase-admin": "^13.0.1",
+    "graphql": "^16.10.0",
     "next": "14.1.4",
     "react": "^18",
     "react-dom": "^18",
