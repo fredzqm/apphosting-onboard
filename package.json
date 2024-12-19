@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@apollo/server": "^4.11.2",
+    "@apollo/subgraph": "^2.9.3",
     "@as-integrations/next": "^3.2.0",
     "@firebasegen/default-connector": "file:dataconnect-generated/js/default-connector",
     "apollo-server-micro": "^3.13.0",
