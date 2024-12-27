@@ -2,9 +2,11 @@
 
 import { NextRequest } from "next/server";
 import { ApolloServer } from "@apollo/server";
+import { GraphQLResolveInfo } from "graphql";
 import { startServerAndCreateNextHandler } from "@as-integrations/next";
 import { gql } from "graphql-tag";
 import { buildSubgraphSchema } from "@apollo/subgraph";
+import { GraphQLResolverMap } from "@apollo/subgraph/dist/schema-helper";
 
 // Construct a schema, using GraphQL schema language
 const typeDefs = gql`
@@ -41,27 +43,45 @@ var users: { [key: string]: User } = {
   },
 };
 
-// The root provides a resolver function for each API endpoint
-const resolvers = {
+interface Resolvers<ResolverContext> extends GraphQLResolverMap<any> {
   Query: {
     user: (
-      parent: any,
-      { id }: { id: string },
-      contextValue: any,
+      parent: void,
+      args: any,
+      context: ResolverContext,
+      info: GraphQLResolveInfo
+    ) => User;
+  };
+  Mutation: {
+    createUser: (
+      parent: void,
+      args: { name: string; email: string },
+      context: ResolverContext,
       info: any
-    ) => {
-      return users[id];
+    ) => User;
+  };
+}
+
+// The root provides a resolver function for each API endpoint
+const resolvers: Resolvers<NextRequest> = {
+  Query: {
+    user: function (
+      parent: void,
+      args: any,
+      context: NextRequest,
+      info: GraphQLResolveInfo
+    ): User {
+      throw new Error("Function not implemented.");
     },
   },
   Mutation: {
-    createUser: (
-      parent: any,
-      { name, email }: { name: string; email: string }
-    ) => {
-      const id = Math.random().toString(36).substring(2, 15);
-      const newUser = { id, name, email };
-      users[id] = newUser;
-      return newUser;
+    createUser: function (
+      parent: void,
+      args: { name: string; email: string },
+      context: NextRequest,
+      info: any
+    ): User {
+      throw new Error("Function not implemented.");
     },
   },
 };
